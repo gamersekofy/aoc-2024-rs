@@ -1,5 +1,7 @@
+use crate::days::day1::Part1;
+
 mod days;
 
 fn main() {
-    println!("Hello, world!");
+    Part1::run("src/days/inputs/day1");
 }
