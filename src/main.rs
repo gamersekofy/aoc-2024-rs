@@ -1,7 +1,7 @@
-use crate::days::day1::Part1;
+use crate::days::day1;
 
 mod days;
 
 fn main() {
-    Part1::run("src/days/inputs/day1");
+    day1::run("src/days/inputs/day1");
 }
