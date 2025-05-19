@@ -22,12 +22,13 @@ pub fn run(input_file_path: &str) {
 
     let safe_count = reports
         .iter()
-        .filter(|report| Part1::is_safe(&report))
+        .filter(|report| Part2::is_safe_with_dampener(&report))
         .count();
-    println!("Total number of safe reports: {}", safe_count);
+    println!("Total number of safe reports with dampener: {}", safe_count);
 }
 
 pub struct Part1;
+pub struct Part2;
 
 impl Part1 {
     fn parse_report(report: &str) -> Vec<i32> {
@@ -63,6 +64,28 @@ impl Part1 {
                 true
             }
         }
+    }
+}
+
+impl Part2 {
+    fn is_safe_with_dampener(report: &Vec<i32>) -> bool {
+        if Part1::is_safe(report) {
+            return true;
+        }
+
+        for skip_index in 0..report.len() {
+            let modified_report: Vec<i32> = report
+                .iter()
+                .enumerate()
+                .filter(|(i, _)| *i != skip_index)
+                .map(|(_, &x)| x)
+                .collect();
+
+            if Part1::is_safe(&modified_report) {
+                return true;
+            }
+        }
+        false
     }
 }
 
